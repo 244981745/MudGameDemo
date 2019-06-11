@@ -32,6 +32,7 @@ int showAttritube(TheOne protagonist,int language)
 		printf("\t魔法:\t%d\n",protagonist.MATK);
 		printf("\t物防:\t%d\n",protagonist.DEF);
 		printf("\t魔防:\t%d\n",protagonist.MDEF);
+		printf("\t装备:\t%.2x\n",protagonist.equipment);
 		printf("========================================\n\n");
 	}
 	else	//英文 
@@ -62,3 +63,9 @@ int battleResult(int ret,const char* monstername)
 	return 0;
 }
 
+extern Items dropItem[];
+int dropResult(int itemid)
+{
+	printf("恭喜你获得了%s！\n",dropItem[itemid].Name);
+	return 0;
+};

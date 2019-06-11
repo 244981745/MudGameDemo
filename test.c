@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 //	battle(&Neo,Monster[0]);
 //	showAttritube(Neo,1);
 
-	battleResult(battle(&Neo,Monster[0]),Monster[0].Name);
+//	battleResult(battle(&Neo,Monster[0]),Monster[0].Name);
 	
 	return 0;
 }
