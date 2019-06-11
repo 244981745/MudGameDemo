@@ -1,3 +1,16 @@
+/*************************************************
+Copyright (C), 2019-2019, DREACYOU
+File name:	datastruct.h 
+Author:		DREACYOU
+Version:	0.0.1.0
+Date:		2019.6.11
+Description: 数据结构 
+Others: 
+Function List: 
+
+History: 
+
+*************************************************/
 #ifndef	_DATASTRUCT_H
 #define	_DATASTRUCT_H
 

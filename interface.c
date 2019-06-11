@@ -1,5 +1,30 @@
+/*************************************************
+Copyright (C), 2019-2019, DREACYOU
+File name:	interface.c
+Author:		DREACYOU
+Version:	0.0.1.0
+Date:		2019.6.11
+Description: 界面设计 
+Others: 
+Function List: 
+
+History: 
+
+*************************************************/
 #include "datastruct.h"
 
+
+/*************************************************
+Function: showMonsterList
+Description: list怪物列表 
+Calls: 
+Called By: 
+
+Input: void
+Output: 
+Return: 返回0
+Others: 
+*************************************************/
 extern SpiritAttribute	Monster[];
 int showMonsterList(void)
 {
@@ -17,8 +42,20 @@ int showMonsterList(void)
 		printf("------------------------\n");
 	}
 	printf("========================================\n\n");
+	return 0; 
 }
 
+/*************************************************
+Function: showAttritube
+Description: list人物属性 
+Calls: 
+Called By: 
+
+Input: TheOne protagonist,int language
+Output: 
+Return: 返回0
+Others: 
+*************************************************/
 int showAttritube(TheOne protagonist,int language)
 {
 	if(language)//中文 
@@ -47,9 +84,21 @@ int showAttritube(TheOne protagonist,int language)
 		printf("\tDEF:\t%d\n",protagonist.DEF);
 		printf("\tMDEF:\t%d\n",protagonist.MDEF);
 		printf("========================================\n\n");
-	} 
+	}
+	return 0; 
 }
 
+/*************************************************
+Function: battleResult
+Description: 显示战斗结果 
+Calls: 
+Called By: 
+
+Input: int ret,const char* monstername
+Output: 
+Return: 返回0
+Others: 
+*************************************************/
 int battleResult(int ret,const char* monstername)
 {
 	if(ret)	//杀死怪物
@@ -63,6 +112,17 @@ int battleResult(int ret,const char* monstername)
 	return 0;
 }
 
+/*************************************************
+Function: dropResult
+Description: 显示掉落物品 
+Calls: 
+Called By: 
+
+Input: int itemid
+Output: 
+Return: 返回0
+Others: 
+*************************************************/
 extern Items dropItem[];
 int dropResult(int itemid)
 {

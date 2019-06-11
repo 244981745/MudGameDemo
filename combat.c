@@ -1,5 +1,30 @@
+/*************************************************
+Copyright (C), 2019-2019, DREACYOU
+File name:	combat.c
+Author:		DREACYOU
+Version:	0.0.1.0
+Date:		2019.6.11
+Description: 战斗系统 
+Others: 
+Function List: 
+
+History: 
+
+*************************************************/
 #include "datastruct.h"
 
+
+/*************************************************
+Function: battle
+Description: 打怪 
+Calls: 
+Called By: 
+
+Input: TheOne *protagonist,SpiritAttribute Monster
+Output: 
+Return: 胜利返回1，被杀死返回-1 
+Others: 
+*************************************************/
 int battle(TheOne *protagonist,SpiritAttribute Monster)
 {
 	while(1)
