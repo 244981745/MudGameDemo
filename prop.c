@@ -24,6 +24,10 @@ Items dropItem[]	=
 //第一层用drop[i][j],i = 0保存所指向物品的索引号
 //通过dropItem[drop[0][j]]获取物品属性，i= 1指向掉落的概率
 
+
+Items military[MILIIDMAX]={0};
+
+
 /*************************************************
 Function: DroppedLoot
 Description: 物品掉落计算 
@@ -43,6 +47,7 @@ int DroppedLoot(TheOne protagonist,unsigned int monsterkeep)
 	else
 		return -1;
 }
+
 
 
 

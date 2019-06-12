@@ -76,6 +76,7 @@ struct PacketLinkNode*
 	node->location		=	dropitem.location;
 	node->num			=	1;
 	node->next 			=	NULL;
+//	printf("%p,%p\n",node,node->next);
 	return node;
 }
 
@@ -113,6 +114,7 @@ int initList(struct PacketLink *L)
 {
 	L->head			=	(struct PacketLinkNode *)malloc(sizeof(struct PacketLinkNode));
 	if(L->head == NULL)return -1;
+	memset((void *)L->head,'\0',sizeof(struct PacketLinkNode));
 	L->link_len		=	0;
 	L->head->next	=	NULL;
 	
@@ -283,7 +285,7 @@ Others:
 *************************************************/
 int listDeleteOneItem(struct PacketLink *L, Items e)
 {
-	struct PacketLinkNode *pre,*p1 = L->head;
+	struct PacketLinkNode *pre,*p1 = L->head->next;
 	int i,erro = 0;
 	for(i = 0; i < L->link_len; i++)
 	{
@@ -326,7 +328,10 @@ Others:
 *************************************************/
 int visit(struct PacketLinkNode *node,int offset)
 {
+	printf("packetItem[%d] p:%p\n",offset,node);
 	printf("PacketItem[%d] ID : %d\n",offset,node->ID);
+	printf("PacketItem[%d] Name:%s\n",offset,node->Name);
+	printf("PacketItem[%d] next:%p\n",offset,node->next);
 	return 0;
 }
 
@@ -344,7 +349,7 @@ Others:
 int listTraverse(struct PacketLink *L)
 {
 	int i;
-	struct PacketLinkNode *p = L->head;
+	struct PacketLinkNode *p = L->head->next;
 	for(i = 0; i < L->link_len; i++)
 		visit(p,i);
 	return 0;

@@ -16,6 +16,7 @@ History:
 
 #define DROPITEMIDMAX		2	//物品ID号上限
 #define	MONSTERIDMAX		3	//怪物ID号上限
+#define	MILIIDMAX			8	//装备ID号上限
 
 
 //精灵属性 
