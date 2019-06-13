@@ -14,36 +14,9 @@ History:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "packet.h"
 #include "datastruct.h"
 
-#define	false	-1
-#define	true	0
-#define NULL	((void *)0)
-
-
-struct PacketLinkNode{
-	unsigned int	ID;
-	unsigned char	Name[12];
-	unsigned int	HP;
-	unsigned int	MP;
-	unsigned int	ATK;
-	unsigned int	MATK;
-	unsigned int	DEF;
-	unsigned int	MDEF;
-	
-	unsigned int	location;
-	unsigned int	num;
-	
-	struct PacketLinkNode *next;
-
-};
-
-struct PacketLink{
-	struct PacketLinkNode *head;
-	int link_len;
-};
-
-//Ô­×Ó²Ù×÷
 
 /*************************************************
 Function: creatNode
@@ -236,10 +209,10 @@ int getElem(struct PacketLink *L, int i, struct PacketLinkNode *e)
 		for(j = 0; j < L->link_len; j++)
 		{
 			if(j == i)
-				{
-					e = p;
-					return 0;
-				}
+			{
+				e = p;
+				return 0;
+			}
 			p = p->next;
 		}
 	e	=	NULL;
@@ -285,11 +258,11 @@ Others:
 *************************************************/
 int listDeleteOneItem(struct PacketLink *L, Items e)
 {
-	struct PacketLinkNode *pre,*p1 = L->head->next;
+	struct PacketLinkNode *pre = L->head,*p1 = pre->next;
 	int i,erro = 0;
 	for(i = 0; i < L->link_len; i++)
 	{
-		pre	=	p1;
+		//pre	=	p1;
 		if(p1 == NULL)
 		{
 			erro = 1;
@@ -298,16 +271,17 @@ int listDeleteOneItem(struct PacketLink *L, Items e)
 		if(p1->ID == e.ID)
 		{
 			p1->num--;
-			if(p1->num == 0)
+			if(p1->num < 1)
 			{
 				pre->next	=	p1->next;
+				//printf("%p,%p,%p\n",p1,pre,p1->next);
 				destroyNode(p1);
 				L->link_len--;
 			}
 			break;
 		}
-		
-		p1 = p1->next;
+		pre = p1;
+		p1 = pre->next;
 	}
 
 	if(erro)return -1;
@@ -351,7 +325,11 @@ int listTraverse(struct PacketLink *L)
 	int i;
 	struct PacketLinkNode *p = L->head->next;
 	for(i = 0; i < L->link_len; i++)
+	{
 		visit(p,i);
+		p=p->next;
+	}
+
 	return 0;
 }
 

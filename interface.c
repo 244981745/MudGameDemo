@@ -12,6 +12,7 @@ History:
 
 *************************************************/
 #include "datastruct.h"
+#include "packet.h"
 
 
 /*************************************************
@@ -129,3 +130,62 @@ int dropResult(int itemid)
 	printf("恭喜你获得了%s！\n",dropItem[itemid].Name);
 	return 0;
 };
+
+/*************************************************
+Function: showPacket
+Description: 显示包裹物品信息 
+Calls: 
+Called By: 
+
+Input: struct PacketLink *L
+Output: 
+Return: 返回0
+Others: 
+*************************************************/
+int showPacket(struct PacketLink *L)
+{
+	int i;
+	struct PacketLinkNode *p = L->head->next;
+	printf("================包裹信息================\n");
+	if(listEmpty(L) == true)printf("packet is empty.\n");
+	else
+	{
+		for(i = 0; i < L->link_len; i++)
+		{
+			//printf("%p\n",p);
+			printf("PacketItem[%d] Name:%s\t",i,p->Name);
+			printf("Have:%d\n",p->num);
+			p=p->next;
+		}
+	}
+	printf("========================================\n\n");
+
+	return 0;
+}
+
+char miloffsetname[8][8]={
+	{"武器"},
+	{"防具"},
+	{"首饰"},
+	{"戒指"},
+	{"戒指"},
+	{"手镯"},
+	{"手镯"},
+	{"坐骑"},
+}; 
+extern Items military[MILIIDMAX];
+int showMilitary(void)
+{
+	int i;
+	printf("================装备信息================\n");
+	
+	for(i = 0; i < MILIIDMAX; i++)
+	{
+		//if(military[i].Name[0] != 0)
+			printf("\t%s:\t%s\n",miloffsetname[i],military[i].Name);
+	}
+	printf("========================================\n\n");
+	return 0;
+}
+
+
