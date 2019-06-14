@@ -188,4 +188,22 @@ int showMilitary(void)
 	return 0;
 }
 
+int showMainMenu(void)
+{
+	printf("================主菜单==================\n");
+	printf("\t1.查看人物属性\n");
+	printf("\t2.查看怪物列表\n");
+	printf("\t3.查看装备清单\n");
+	printf("\t4.查看包裹清单\n");
+	printf("\t5.去打怪\n");
+	printf("\t6.存档和读档\n");
+	printf("\t7.退出游戏\n");
+	printf("========================================\n\n");		
+} 
 
+int  showEixt(void)
+{
+	
+	
+	return 0;
+}

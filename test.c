@@ -22,9 +22,16 @@ int main(int argc, char **argv)
 	showPacket(&gamepack);	
 	showAttritube(Neo,1);	
 	showMilitary();
+	
+//	gameSave(&Neo,&gamepack);	//´æµµ 
+	
 	changeMilitary(&Neo,&gamepack,0,1);
 	showAttritube(Neo,1);
 	showMilitary();
+	showPacket(&gamepack);
+	TheOne make;
+
+//	gameLoad(&Neo,&gamepack);	//¶Áµµ 
 	showPacket(&gamepack);
 	destroyList(&gamepack);
 	
