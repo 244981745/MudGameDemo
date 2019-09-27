@@ -8,6 +8,8 @@ filetree<br>
     datastruct.h  //数据结构文件<br>
     game.c      //游戏主体文件<br>
     game.db     //存单索引<br>
+    gamesrv.c     //game srv<br>
+    gameclient.c  //客户端demo <br>
     gutscript.c //脚本，用来保存如欢迎界面等文本，但未使用<br>
     interface.c //负责界面的所有函数<br>
     monster.c   //怪物和主角初始化<br>
@@ -20,7 +22,7 @@ filetree<br>
     testlink.c  //包裹链测试文件<br>
     脑图.xmind  //游戏结构脑图<br>
     道具列表.xlsx //如文件名<br>
-    
+    通讯协议.xlsx //如文件名<br>
     如编译器无法对game.c直接编译整个游戏，根据报错信息自行建立工程或makefile，建立工程无需启用config.h，但需要将数据结构的头文件包含到game文件中。
     虽然更多细节没有完善，但up主决定不再对这个demo进行开发。
     9102-6-14
