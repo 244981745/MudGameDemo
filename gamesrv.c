@@ -5,15 +5,6 @@
 #define MAX_QUEUE		100
 #define BUFFER_SIZE		1024
 
-void SendMsg(SOCKET fd)
-{
-	
-}
-
-void RecvMsg(SOCKET fd)
-{
-	
-}
 
 int main(int argc, char **argv)
 {
@@ -67,7 +58,9 @@ int main(int argc, char **argv)
 	    printf("socket listen success.\n");
 	}
 	
-	char recvBuf[1024];
+	unsigned char recvBuf[1024];
+	unsigned char region1[256],region2[256];
+	int flag = 0;
 	memset((void *)recvBuf,'\0',1024);
 	for(;;)
     {				
@@ -82,10 +75,15 @@ int main(int argc, char **argv)
                     printf("client:%s link in.\n",inet_ntoa(clientaddr.sin_addr));
             }
 
-			send(clientfd,"hello",6,0);
+			//send(clientfd,"hello",6,0);
 			recv(clientfd,recvBuf,1024,0);
 			
-			printf("%s\n",recvBuf);
+			memset((void*)region1,'\0',256);
+			memset((void*)region2,'\0',256);
+			buffDecoder(recvBuf, region1, region2, &flag);
+			
+			
+			printf("%s\n%s\n",region1, region2);
 			
 	        Sleep(1000);
 	        closesocket(clientfd);
@@ -95,6 +93,36 @@ int main(int argc, char **argv)
 	
 	closesocket(srvfd);
 	WSACleanup();
+	
+	return 0;
+}
+
+int buffDecoder(const unsigned char *buffer, unsigned char *Region1, unsigned char *Region2, int *flag)
+{
+	int offset = 2;
+	int len	=	0;
+	int i,j;
+	*flag	=	(int)buffer[0];
+	i	=	(int)buffer[1];
+	
+	if( i < 0 )	return -1;
+	if( i > 3 )	return -1;
+	
+	if( i > 0)
+	{
+		len	=	(int)buffer[offset++];
+		for( j = 0; j < len; j++)
+			Region1[j]	=	buffer[offset++];
+		Region1[j]	=	'\0';
+	}
+	
+	if( i > 1)
+	{
+		len	=	(int)buffer[offset++];
+		for( j = 0; j < len; j++)
+			Region2[j]	=	buffer[offset++];
+		Region2[j]	=	'\0';
+	}
 	
 	return 0;
 }

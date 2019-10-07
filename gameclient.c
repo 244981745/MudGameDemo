@@ -50,4 +50,46 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+int userLogOn(SOCKET srvfd, const char *userName, const char *userPwd)
+{
+	unsigned char len;
+	unsigned char sendBuf[1024];
+	memset((void *)sendBuf, '\0', 1024);
 
+	sendBuf[0]	=	0x1;	// logonflag
+	sendBuf[1]	=	0x2;	//section
+
+	len	=	strlen(userName);
+	sendBuf[strlen(sendBuf)]	=	len;
+	strcat(sendBuf,userName);
+	
+	len	=	strlen(userPwd);
+	sendBuf[strlen(sendBuf)]	=	len;
+	strcat(sendBuf,userPwd);
+
+	send(srvfd,sendBuf,strlen(sendBuf),0);
+	
+	return 0;
+}
+
+int userLogIn(SOCKET srvfd, const char *userName, const char *userPwd)
+{
+	unsigned char len;
+	unsigned char sendBuf[1024];
+	memset((void *)sendBuf, '\0', 1024);
+
+	sendBuf[0]	=	0x2;	// loginflag
+	sendBuf[1]	=	0x2;	//section
+
+	len	=	strlen(userName);
+	sendBuf[strlen(sendBuf)]	=	len;
+	strcat(sendBuf,userName);
+	
+	len	=	strlen(userPwd);
+	sendBuf[strlen(sendBuf)]	=	len;
+	strcat(sendBuf,userPwd);
+
+	send(srvfd,sendBuf,strlen(sendBuf),0);
+	
+	return 0;
+}
