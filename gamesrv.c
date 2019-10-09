@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <winsock.h>
 #include <winsock2.h>
+#include "gamesrv.h"
 
 #define MAX_QUEUE		100
 #define BUFFER_SIZE		1024
+
 
 
 int main(int argc, char **argv)
@@ -61,7 +63,9 @@ int main(int argc, char **argv)
 	unsigned char recvBuf[1024];
 	unsigned char region1[256],region2[256];
 	int flag = 0;
+
 	memset((void *)recvBuf,'\0',1024);
+
 	for(;;)
     {				
             clientfd = accept(srvfd, (struct sockaddr*)&clientaddr, &slen);
@@ -75,16 +79,13 @@ int main(int argc, char **argv)
                     printf("client:%s link in.\n",inet_ntoa(clientaddr.sin_addr));
             }
 
-			//send(clientfd,"hello",6,0);
 			recv(clientfd,recvBuf,1024,0);
-			
+
 			memset((void*)region1,'\0',256);
 			memset((void*)region2,'\0',256);
 			buffDecoder(recvBuf, region1, region2, &flag);
-			
-			
-			printf("%s\n%s\n",region1, region2);
-			
+			logOnSrv(clientfd,region1,region2);
+
 	        Sleep(1000);
 	        closesocket(clientfd);
 	
@@ -123,6 +124,35 @@ int buffDecoder(const unsigned char *buffer, unsigned char *Region1, unsigned ch
 			Region2[j]	=	buffer[offset++];
 		Region2[j]	=	'\0';
 	}
+	
+	return 0;
+}
+
+
+int logOnSrv(SOCKET clientfd, char *UserName, char *UserPwd)
+{
+	int	TokenRing = 100;
+	unsigned char sendBuf[1024];
+	memset((void *)sendBuf,'\0',1024);
+	if(strcmp(UserName, "user") == 0)
+	{
+		if(strcmp(UserPwd, "password") == 0)
+		{
+			sendBuf[0]	=	0x81;
+			sendBuf[1]	=	0x2;
+			sendBuf[2]	=	0x4;
+			
+			sendBuf[3]	=	(TokenRing>>24) && 0xff;
+			sendBuf[4]	=	(TokenRing>>16) && 0xff;
+			sendBuf[5]	=	(TokenRing>>8) && 0xff;
+			sendBuf[6]	=	(TokenRing>>0) && 0xff;
+			send(clientfd,sendBuf,100,0);			
+			return 1;
+		}
+	}
+	
+	sendBuf[0]	=	0x80;
+	send(clientfd,sendBuf,100,0);
 	
 	return 0;
 }
